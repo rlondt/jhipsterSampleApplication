@@ -1,0 +1,64 @@
+entity Player {
+ name String required,
+ weight Number,
+ age Number,
+ graduation Graduation
+}
+
+enum Graduation {
+WHITE,
+WHITE_YELLOW,
+YELLOW,
+YELLOW_GREEN,
+GREEN,
+GREEN_BLUE,
+BLUE,
+BLUE_RED,
+RED,
+RED_BLACK,
+BLACK1,
+BLACK2,
+BLACK3
+}
+
+entity Poule {
+ name String required
+}
+
+entity Field {
+ name String required
+}
+
+entity Match {
+ winner Side
+}
+enum Side {RED, BLUE}
+
+entity Round {
+
+}
+
+entity Score {
+ pointsRed Number,
+ pointsBlue Number,
+ penaltiesRed Number,
+ penaltiesBlue Number
+}
+
+relationship OneToMany{
+ Player {poule} to Poule,
+ Match{redPlayer} to Player,
+ Match{bluePlayer} to Player,
+ Match{score} to Score,
+ Match{field} to Field,
+ Round{score} to Score,
+ Match{poule} to Poule
+}
+
+relationship OneToOne{
+ Match{score} to Score,
+ Round{score} to Score,
+ Match{round1} to Round,
+ Match{round2} to Round,
+ Match{round3} to Round
+}
